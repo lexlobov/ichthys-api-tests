@@ -1,0 +1,90 @@
+package clients;
+
+import com.google.gson.reflect.TypeToken;
+import io.restassured.response.ValidatableResponse;
+import models.bibles.Bible;
+import models.bibles.Book;
+import models.bibles.Verse;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
+
+import static io.restassured.RestAssured.given;
+
+public class BiblesClient extends BaseSpec{
+
+    private final String URI = "/api/v1/bibles";
+
+    private ValidatableResponse getBibles(String token){
+        return given().spec(baseSpec())
+                .header("Authorization", String.format("Bearer %s", token))
+                .get(baseUrl + URI)
+                .then();
+    }
+
+    private List<Bible> getBiblesModel(String token){
+        Type bibles = new TypeToken<ArrayList<Bible>>() {}.getType();
+        return given().spec(baseSpec())
+                .header("Authorization", String.format("Bearer %s", token))
+                .get(baseUrl + URI)
+                .body().as(bibles);
+    }
+
+    private Bible getBibleModel(String token, String bibleId){
+        return given().spec(baseSpec())
+                .header("Authorization", String.format("Bearer %s", token))
+                .pathParam("id", bibleId)
+                .get(baseUrl + URI + "/{id}" + "/books")
+                .body().as(Bible.class);
+    }
+
+    private ValidatableResponse getBible(String token, String bibleId){
+        return given().spec(baseSpec())
+                .header("Authorization", String.format("Bearer %s", token))
+                .pathParam("id", bibleId)
+                .get(baseUrl + URI + "/{id}" + "/books")
+                .then();
+    }
+
+    private Book getBookModel(String token, String bibleId, String bookId){
+        return given().spec(baseSpec())
+                .header("Authorization", String.format("Bearer %s", token))
+                .pathParam("id", bibleId)
+                .pathParam("bookId", bookId)
+                .get(baseUrl + URI + "/{id}" + "/books")
+                .body().as(Book.class);
+    }
+
+    private ValidatableResponse getBook(String token, String bibleId, String bookId){
+        return given().spec(baseSpec())
+                .header("Authorization", String.format("Bearer %s", token))
+                .pathParam("id", bibleId)
+                .pathParam("bookId", bookId)
+                .get(baseUrl + URI + "/{id}" + "/books/" + "{bookId}")
+                .then();
+    }
+
+    private ValidatableResponse search(String token, String bibleId, String text){
+        return given().spec(baseSpec())
+                .header("Authorization", String.format("Bearer %s", token))
+                .pathParam("id", bibleId)
+                .queryParam("text", text)
+                .get(baseUrl + URI + "/{id}" + "/search")
+                .then();
+    }
+
+    private List<Verse> searchModel(String token, String bibleId, String text){
+        Type verses = new TypeToken<ArrayList<Verse>>() {}.getType();
+        return given().spec(baseSpec())
+                .header("Authorization", String.format("Bearer %s", token))
+                .pathParam("id", bibleId)
+                .queryParam("text", text)
+                .get(baseUrl + URI + "/{id}" + "/search")
+                .body().as(verses);
+    }
+
+
+
+
+}
