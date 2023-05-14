@@ -42,5 +42,6 @@ public class BaseTest {
             e.printStackTrace();
         }
         baseSteps.getTokenFromAuth(email, password);
+
     }
 }

@@ -11,6 +11,7 @@ public class BaseSteps {
     public void getTokenFromAuth(String login, String password){
         AuthenticationResponse response = client.loginUserModel(login, password);
         setToken(response.getAccessToken());
+        System.out.println(token);
     }
 
 

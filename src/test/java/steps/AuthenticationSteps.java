@@ -20,5 +20,12 @@ public class AuthenticationSteps extends BaseSteps{
         assertThat("Status code should be 201", actualStatusCode, equalTo(HttpStatus.SC_CREATED));
     }
 
+    public void logout(String login, String password){
+        getTokenFromAuth(login, password);
+        ValidatableResponse response = client.logout(getToken());
+        int actualStatusCode = response.extract().statusCode();
+        assertThat("Status code should be 200", actualStatusCode, equalTo(HttpStatus.SC_OK));
+    }
+
 
 }
