@@ -14,4 +14,9 @@ public class SearchTest extends BaseTest {
     public void searchedTextIsInFirstFiveSearchResults(){
         steps.searchedTextIsInTopFiveResults(steps.getTokenFromAuth(email, password),"ru", expectedVerse.getText(), expectedVerse);
     }
+
+    @Test
+    public void searchRequestReturns200(){
+        steps.searchRequestReturns200StatusCode(steps.getTokenFromAuth(email, password), "ru", expectedVerse.getText());
+    }
 }
