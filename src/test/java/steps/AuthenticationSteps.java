@@ -1,6 +1,5 @@
 package steps;
 
-import clients.AuthenticationClient;
 import io.restassured.response.ValidatableResponse;
 import org.apache.http.HttpStatus;
 

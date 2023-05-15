@@ -2,7 +2,6 @@ package clients;
 
 import io.restassured.response.ValidatableResponse;
 import models.athentication.AuthenticationResponse;
-import models.athentication.User;
 
 import static io.restassured.RestAssured.given;
 
