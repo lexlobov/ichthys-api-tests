@@ -16,14 +16,14 @@ public class BiblesClient extends BaseSpec{
 
     private final String URI = "/api/v1/bibles";
 
-    private ValidatableResponse getBibles(String token){
+    public ValidatableResponse getBibles(String token){
         return given().spec(baseSpec())
                 .header("Authorization", String.format("Bearer %s", token))
                 .get(baseUrl + URI)
                 .then();
     }
 
-    private List<Bible> getBiblesModel(String token){
+    public List<Bible> getBiblesModel(String token){
         Type bibles = new TypeToken<ArrayList<Bible>>() {}.getType();
         return given().spec(baseSpec())
                 .header("Authorization", String.format("Bearer %s", token))
@@ -31,7 +31,7 @@ public class BiblesClient extends BaseSpec{
                 .body().as(bibles);
     }
 
-    private Bible getBibleModel(String token, String bibleId){
+    public Bible getBibleModel(String token, String bibleId){
         return given().spec(baseSpec())
                 .header("Authorization", String.format("Bearer %s", token))
                 .pathParam("id", bibleId)
@@ -39,7 +39,7 @@ public class BiblesClient extends BaseSpec{
                 .body().as(Bible.class);
     }
 
-    private ValidatableResponse getBible(String token, String bibleId){
+    public ValidatableResponse getBible(String token, String bibleId){
         return given().spec(baseSpec())
                 .header("Authorization", String.format("Bearer %s", token))
                 .pathParam("id", bibleId)
@@ -47,7 +47,7 @@ public class BiblesClient extends BaseSpec{
                 .then();
     }
 
-    private Book getBookModel(String token, String bibleId, String bookId){
+    public Book getBookModel(String token, String bibleId, String bookId){
         return given().spec(baseSpec())
                 .header("Authorization", String.format("Bearer %s", token))
                 .pathParam("id", bibleId)
@@ -56,7 +56,7 @@ public class BiblesClient extends BaseSpec{
                 .body().as(Book.class);
     }
 
-    private ValidatableResponse getBook(String token, String bibleId, String bookId){
+    public ValidatableResponse getBook(String token, String bibleId, String bookId){
         return given().spec(baseSpec())
                 .header("Authorization", String.format("Bearer %s", token))
                 .pathParam("id", bibleId)
@@ -65,7 +65,7 @@ public class BiblesClient extends BaseSpec{
                 .then();
     }
 
-    private ValidatableResponse search(String token, String bibleId, String text){
+    public ValidatableResponse search(String token, String bibleId, String text){
         return given().spec(baseSpec())
                 .header("Authorization", String.format("Bearer %s", token))
                 .pathParam("id", bibleId)
@@ -74,7 +74,7 @@ public class BiblesClient extends BaseSpec{
                 .then();
     }
 
-    private List<Verse> searchModel(String token, String bibleId, String text){
+    public List<Verse> searchModel(String token, String bibleId, String text){
         Type verses = new TypeToken<ArrayList<Verse>>() {}.getType();
         return given().spec(baseSpec())
                 .header("Authorization", String.format("Bearer %s", token))
