@@ -45,7 +45,6 @@ public class BiblesSteps extends BaseSteps{
 
     public String getBibleId(String token,String lang){
         List<Bible> bibleObjects = client.getBibles(token)
-                .log().status().log().headers()
                 .extract().body().jsonPath().getList("", Bible.class);
         return bibleObjects.stream()
                 .filter(bible -> bible.getLanguage().equals(lang))

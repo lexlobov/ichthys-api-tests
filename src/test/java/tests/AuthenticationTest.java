@@ -7,8 +7,7 @@ import steps.AuthenticationSteps;
 
 public class AuthenticationTest extends BaseTest{
 
-    AuthenticationClient client = new AuthenticationClient();
-    AuthenticationSteps steps = new AuthenticationSteps(client);
+    AuthenticationSteps steps = new AuthenticationSteps();
 
     @Test
     public void authenticationWithCorrectCredentialsReturns201CodeTest(){
