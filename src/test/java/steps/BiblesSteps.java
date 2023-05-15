@@ -3,12 +3,10 @@ package steps;
 import clients.BiblesClient;
 import models.bibles.Bible;
 import models.bibles.Verse;
-import org.apache.http.HttpStatus;
 
-import java.net.http.HttpResponse;
 import java.util.List;
 
-import static org.apache.http.HttpStatus.*;
+import static org.apache.http.HttpStatus.SC_OK;
 import static org.hamcrest.MatcherAssert.assertThat;
 public class BiblesSteps extends BaseSteps{
 
