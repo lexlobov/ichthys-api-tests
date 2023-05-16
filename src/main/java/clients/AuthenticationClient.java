@@ -27,7 +27,7 @@ public class AuthenticationClient extends BaseSpec{
                         "  \"email\": \"%s\",\n" +
                         "  \"password\": \"%s\"\n" +
                         "}", email, password))
-                .post(baseUrl + URI + "/login")
+                .post(URI + "/login")
                 .body().as(AuthenticationResponse.class);
     }
 
@@ -35,7 +35,7 @@ public class AuthenticationClient extends BaseSpec{
         return given().spec(baseSpec())
                 .when()
                 .header("Authorization", String.format("Bearer %s", token))
-                .get(baseUrl + URI + "/logout")
+                .get(URI + "/logout")
                 .then();
     }
 
