@@ -1,10 +1,14 @@
 package models.athentication;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
 
     private String id;
@@ -18,7 +22,4 @@ public class User {
     private String updatedAt;
     private String deletedAt;
     private Boolean isActive;
-
-    public User() {
-    }
 }

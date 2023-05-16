@@ -1,12 +1,12 @@
 package models.bibles;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 @Data
 @Builder
 @EqualsAndHashCode(of = {"bookNumber", "chapterNumber", "verseNumber"})
+@NoArgsConstructor
+@AllArgsConstructor
 public class Verse {
     private String id;
     private Integer bookNumber;
