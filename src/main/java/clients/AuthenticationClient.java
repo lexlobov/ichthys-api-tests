@@ -27,7 +27,9 @@ public class AuthenticationClient extends BaseSpec{
                         "  \"email\": \"%s\",\n" +
                         "  \"password\": \"%s\"\n" +
                         "}", email, password))
+
                 .post(URI + "/login")
+
                 .body().as(AuthenticationResponse.class);
     }
 
@@ -37,6 +39,7 @@ public class AuthenticationClient extends BaseSpec{
                 .header("Authorization", String.format("Bearer %s", token))
                 .get(URI + "/logout")
                 .then();
+
     }
 
     public ValidatableResponse profile(String token){

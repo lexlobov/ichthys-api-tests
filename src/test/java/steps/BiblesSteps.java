@@ -5,6 +5,7 @@ import models.bibles.Bible;
 import models.bibles.Verse;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -17,7 +18,7 @@ public class BiblesSteps extends BaseSteps{
         String bibleId = getBibleId(token, lang);
         //Получам первые 5 реузльтатов поиска
         List<Verse> topFiveSearchResults = client.search(token, bibleId, requestText)
-                .extract().body().jsonPath().getList("", Verse.class).stream().limit(5).toList();
+                .extract().body().jsonPath().getList("", Verse.class).stream().limit(5).collect(Collectors.toList());
 
         assertThat("Searched text should be in first 5 results", topFiveSearchResults.stream().anyMatch(r->r.equals(expectedVerse)));
     }
