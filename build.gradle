@@ -39,7 +39,11 @@ dependencies {
     testImplementation group: 'io.qameta.allure', name: 'allure-commandline', version: '2.21.0'
     testImplementation group: 'io.qameta.allure', name: 'allure-assertj', version: '2.21.0'
 }
+compileJava.options.encoding = 'UTF-8'
 
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
 test {
     useJUnitPlatform()
 }
