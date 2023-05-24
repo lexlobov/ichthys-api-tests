@@ -44,7 +44,7 @@ public class BaseTest {
         if (Files.exists(Path.of(path))) {
             loadFromFile(props, path);
         } else {
-            props.setProperty("adminLogin", System.getenv("adminLogin"));
+            props.setProperty("dminLogin", System.getenv("adminLogin"));
             props.setProperty("adminPassword", System.getenv("adminPassword"));
         }
         return props;
