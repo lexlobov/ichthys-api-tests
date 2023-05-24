@@ -42,7 +42,6 @@ public class BaseTest {
 
         String path = "local.properties";
         if (Files.exists(Path.of(path))) {
-            System.out.println("Loading properties from " + path);
             loadFromFile(props, path);
         } else {
             props.setProperty("adminLogin", System.getenv("adminLogin"));
