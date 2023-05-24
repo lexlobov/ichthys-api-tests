@@ -1,14 +1,12 @@
 package tests;
 
-import io.qameta.allure.restassured.AllureRestAssured;
-import io.restassured.RestAssured;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.TestInstance;
 import steps.BaseSteps;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Properties;
 //@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class BaseTest {
@@ -32,15 +30,32 @@ public class BaseTest {
 
     @BeforeEach
     public void setUp(){
-        Properties props = new Properties();
-        try (FileInputStream fis = new FileInputStream("local.properties")){
-            props.load(fis);
-            email = props.getProperty("adminLogin");
-            password = props.getProperty("adminPassword");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Properties props = loadProperties();
+        email = props.getProperty("adminLogin");
+        password = props.getProperty("adminPassword");
         baseSteps.getTokenFromAuth(email, password);
         //RestAssured.filters(new AllureRestAssured());
     }
+
+    private Properties loadProperties() {
+        Properties props = new Properties();
+        props.setProperty("adminLogin", System.getenv("adminLogin"));
+        props.setProperty("adminPassword", System.getenv("adminPassword"));
+
+        String path = "local.properties";
+        if (Files.exists(Path.of(path))) {
+            System.out.println("Loading properties from " + path);
+            loadFromFile(props, path);
+        }
+        return props;
+    }
+
+    private void loadFromFile(Properties props, String path) {
+        try (FileInputStream fis = new FileInputStream(path)){
+            props.load(fis);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
+
