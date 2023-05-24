@@ -39,13 +39,14 @@ public class BaseTest {
 
     private Properties loadProperties() {
         Properties props = new Properties();
-        props.setProperty("adminLogin", System.getenv("adminLogin"));
-        props.setProperty("adminPassword", System.getenv("adminPassword"));
 
         String path = "local.properties";
         if (Files.exists(Path.of(path))) {
             System.out.println("Loading properties from " + path);
             loadFromFile(props, path);
+        } else {
+            props.setProperty("adminLogin", System.getenv("adminLogin"));
+            props.setProperty("adminPassword", System.getenv("adminPassword"));
         }
         return props;
     }
